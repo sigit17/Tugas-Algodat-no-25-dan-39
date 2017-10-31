@@ -24,7 +24,10 @@ public class main {
         tr.preOrder();
         System.out.println("postOrder");
         tr.postOrder();
-        tr.swapSubtrees();
-        tr.preOrder();
+        tree.swap(tr.root);
+        System.out.println();
+        tree.preOrder();
+        System.out.println();
+        tree.postOrder();
     }
 }
