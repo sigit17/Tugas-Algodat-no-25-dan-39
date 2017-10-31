@@ -15,6 +15,23 @@ public class BinaryTreeNode implements Cloneable{
         leftChild = theleftChild;
         rightChild = therightChild;
     }
+
+    public BinaryTreeNode getLeftChild() {
+        return leftChild;
+    }
+
+    public BinaryTreeNode getRightChild() {
+        return rightChild;
+    }
+
+    public void setLeftChild(BinaryTreeNode leftChild) {
+        this.leftChild = leftChild;
+    }
+
+    public void setRightChild(BinaryTreeNode rightChild) {
+        this.rightChild = rightChild;
+    }
+    
     @Override
     public String toString(){
         return "[" + element + "," + name + "]";
@@ -73,14 +90,17 @@ public class BinaryTreeNode implements Cloneable{
         }
         return false;
     }
-    public void swap(BinaryTreeNode node){
-        if(node!=null){
-            BinaryTreeNode temp;
-            swap(node.leftChild);
-            swap(node.rightChild);				
-            temp=node.leftChild;
-            node.leftChild=node.rightChild;
-            node.rightChild=temp;
-	}
+    public BinaryTreeNode swapSubtrees() {
+        doSwap(this.root);
+        return this;
+    }
+    public void doSwap(BinaryTreeNode p) {
+        if(p != null) {
+            BinaryTreeNode temp = p.getLeftChild();
+            p.setLeftChild(p.getRightChild());
+            p.setRightChild(temp);
+            doSwap(p.getLeftChild());
+            doSwap(p.getRightChild());
+        }
     }
 }

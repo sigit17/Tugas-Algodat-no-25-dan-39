@@ -23,6 +23,8 @@ public class main {
         System.out.println("preOrder");
         tr.preOrder();
         System.out.println("postOrder");
-        tree.swap();
+        tr.postOrder();
+        tr.swapSubtrees();
+        tr.preOrder();
     }
 }
