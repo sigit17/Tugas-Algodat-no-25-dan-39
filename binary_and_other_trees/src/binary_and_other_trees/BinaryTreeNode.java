@@ -1,8 +1,9 @@
 package binary_and_other_trees;
-public class BinaryTreeNode {
+public class BinaryTreeNode implements Cloneable{
     Object element,name;
     BinaryTreeNode leftChild;
     BinaryTreeNode rightChild;
+    private int size;
     //constructor
     public BinaryTreeNode(){}
     public BinaryTreeNode(Object theElement){
@@ -46,14 +47,40 @@ public class BinaryTreeNode {
     void postOrder()  {     postOrder(root);  }
     void inOrder()    {     inOrder(root);   }
     void preOrder()   {     preOrder(root);  }
-    BinaryTreeNode Clone(BinaryTreeNode focusNode) {
-        if (focusNode == null) {
-            // base case
-            return null;
+    @Override
+    public Object clone() {
+        try{
+            return super.clone();
         }
-        BinaryTreeNode copy = new BinaryTreeNode(focusNode.element);
-        copy.leftChild = Clone(focusNode.leftChild);
-        copy.rightChild = Clone(focusNode.rightChild);
-        return copy;
+        catch (CloneNotSupportedException s){
+            throw new Error("tidak bisa di clone");
+        }
+    }
+    public void clonePreOrder(BinaryTreeNode a){
+        clone();
+        a.preOrder();
+    }
+    public void clonePostOrder(BinaryTreeNode a){
+        clone();
+        a.postOrder();
+    }
+    public boolean compareTree(BinaryTreeNode a, BinaryTreeNode b){
+        if(a == null && b == null){
+            return true;
+        }
+        if(a != null && b != null){
+            return (a.element == b.element && compareTree(a.leftChild, b.leftChild) && compareTree(a.rightChild, b.rightChild));
+        }
+        return false;
+    }
+    public void swap(BinaryTreeNode node){
+        if(node!=null){
+            BinaryTreeNode temp;
+            swap(node.leftChild);
+            swap(node.rightChild);				
+            temp=node.leftChild;
+            node.leftChild=node.rightChild;
+            node.rightChild=temp;
+	}
     }
 }
